@@ -1,3 +1,4 @@
+import os
 from Detector import main_app
 from create_classifier import train_classifer
 from create_dataset import start_capture
@@ -97,9 +98,9 @@ class PageOne(tk.Frame):
         if self.user_name.get() == "None":
             messagebox.showerror("Error", "Name cannot be 'None'")
             return
-        elif self.user_name.get() in names:
-            messagebox.showerror("Error", "User already exists!")
-            return
+        # elif self.user_name.get() in names:
+        #     messagebox.showerror("Error", "User already exists!")
+        #     return
         elif len(self.user_name.get()) == 0:
             messagebox.showerror("Error", "Name cannot be empty!")
             return
@@ -115,6 +116,7 @@ class PageTwo(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         global names
+        print(f"names {names}")
         self.controller = controller
         tk.Label(self, text="Select user", fg="#263942", font='Helvetica 12 bold').grid(row=0, column=0, padx=10, pady=10)
         self.buttoncanc = tk.Button(self, text="Cancel", command=lambda: controller.show_frame("StartPage"), bg="#ffffff", fg="#263942")
@@ -154,18 +156,22 @@ class PageThree(tk.Frame):
         self.trainbutton.grid(row=1, column=1, ipadx=5, ipady=4, padx=10, pady=20)
 
     def capimg(self):
-        self.numimglabel.config(text=str("Captured Images = 0 "))
+        path = "./data/" + self.controller.active_name
+        num_of_images = len(os.listdir(path))
+        self.numimglabel.config(text=str(f"Captured Images = {num_of_images} "))
         messagebox.showinfo("INSTRUCTIONS", "We will Capture 300 pic of your Face.")
         x = start_capture(self.controller.active_name)
         self.controller.num_of_images = x
         self.numimglabel.config(text=str("Number of images captured = "+str(x)))
 
     def trainmodel(self):
-        if self.controller.num_of_images < 300:
-            messagebox.showerror("ERROR", "No enough Data, Capture at least 300 images!")
-            return
+        # if self.controller.num_of_images < 300:
+        #     messagebox.showerror("ERROR", "No enough Data, Capture at least 300 images!")
+        #     return
         train_classifer(self.controller.active_name)
         messagebox.showinfo("SUCCESS", "The modele has been successfully trained!")
+        name = self.controller.active_name
+        print(f"traned name {name}")
         self.controller.show_frame("PageFour")
 
 

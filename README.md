@@ -1,28 +1,19 @@
 # Face Recogniton GUI-APP
 
 
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://www.youtube.com/channel/UCKvgGs-ALhvOq9u95PHXHNw)
-
-# Live Demo
-```html
-https://www.youtube.com/embed/3EBdT-0gvu8
-
-```
-
 
 # A very Simple Gui app for Face Detection 
 
   - Collect Face Data
   - Build Face Classifier 
   - Detecte the face
-
-#  New Features!
-
-  - Add Emotion detection
-  - Fixed image loading in Linux 
+  - REcognize the face and show if its identified or not.
   
   
 # Installation
+
+Important note - For now training dataset is not uploaded on github. So as soon as this code is downloaded, inside data folder, do create a folder with the name of a person who you want to train the model with.Then in file train_model.py, just replace your new folder created name on line 10 (Example: data/{your_folder_name)}) Then follow the steps mentioned below.
+
 
 1 : Install the requirements .
 
@@ -33,8 +24,24 @@ $ pip install -r  requirements.txt
 2 : Run The App 
 
 ```sh
-$ python app-gui.py
+$ python3 app-gui.py
 ```
+
+3. 2nd step will run only for collecting the dataset of a person with whom we want to train our model.
+
+4. Then once dataset is collected, we need to train the model. For that run the code in the terminal.
+
+```sh
+$ python3 train_model.py
+```
+
+5. Now once model is trained, a file named 'face_enc' will be generated. Now we are good to go with face recognition. For that run the command 
+
+```sh
+$ python3 face_recognition_in_video.py
+```
+
+6. On success of step 5, video cam will be started and in realtime it will display if identified face os recognized or not. 
 
 # APP GUI
 
@@ -65,8 +72,8 @@ A webcam window will popup and start recognition proccess<br>
 
 <br><br>
 
-Made By ❤ : [JoeVenner](mailto:ylafrimi@gmail.com)<br>
-**Free Software, Hell Yeah!**
+Made By ❤ : [Anirudh](anirudh.chawla@radixweb.com)<br>
+
 
 
 

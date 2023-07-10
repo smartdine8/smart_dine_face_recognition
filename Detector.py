@@ -17,13 +17,13 @@ def main_app(name):
 
             for (x,y,w,h) in faces:
 
-
                 roi_gray = gray[y:y+h,x:x+w]
 
                 id,confidence = recognizer.predict(roi_gray)
                 confidence = 100 - int(confidence)
                 pred = 0
-                if confidence > 50:
+                print(f"confidence {confidence}")
+                if confidence > 80:
                     #if u want to print confidence level
                             #confidence = 100 - int(confidence)
                             pred += +1
@@ -72,3 +72,4 @@ def main_app(name):
         cap.release()
         cv2.destroyAllWindows()
         
+# main_app('anirudh')
